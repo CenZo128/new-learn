@@ -21,9 +21,11 @@ class ProductController {
     }
 
     static async addProduct(req, res, next) {
-        const { name, info, image, price, stock } = req.body;
+        const { name, info, price, stock } = req.body;
         //Menerima dari Middlewares authentication
         const UserId = req.userData.id
+        //Multer
+        const image = req.file.path;
         try {
             const product = await Product.create({
                 name, info, image, price, stock, UserId
